@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
 import { useState } from 'react';
@@ -47,11 +47,8 @@ const App = ()=> {
       <Grid item  xs={8}>
         <Typography variant="h3">Breaking Bad</Typography>
       </Grid>
-      <Grid item xs={1}>
-        <Button onClick={()=>{setFilteredData(charactersDetails) }}>Reset</Button>
-      </Grid>
       <Grid item  xs={3}>
-        <InputFrom handleSearch={handleSearch}/>
+        <InputFrom handleSearch={handleSearch} handleResetSearch={()=>setFilteredData(charactersDetails)}/>
       </Grid>
     </Grid>
    </Box>

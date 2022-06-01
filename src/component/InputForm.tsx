@@ -16,17 +16,23 @@ const schema = yup
 
 interface IInput {
     handleSearch: (searchString:string)=>void;
+    handleResetSearch: ()=>void
 }  
 
-export const InputFrom:React.FC<IInput> = ({handleSearch})=>{
+export const InputFrom:React.FC<IInput> = ({handleSearch, handleResetSearch})=>{
     const {
        handleSubmit,
         formState: { errors },
-        control
+        control,
+        reset
       } = useForm<IFromValue>({ resolver: yupResolver(schema) });
       
     const onSubmit:SubmitHandler<IFromValue> = (data)=>{
         handleSearch(data.search)
+    }
+    const handleReset = ()=>{
+        reset()
+        handleResetSearch()
     }
     return<>
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,6 +59,7 @@ export const InputFrom:React.FC<IInput> = ({handleSearch})=>{
             {errors.search?.message && <Typography color="red">{errors.search.message}</Typography>}
             </Grid>
             <Button name="submit" type="submit">Submit</Button>
+            <Button onClick={handleReset} >Reset</Button>
         </Grid>
     </form>
     </>
